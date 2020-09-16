@@ -1,0 +1,6 @@
+{
+  "IMAP_SERVER":"mail.example.com",
+  "IMAP_PORT":993,
+  "IMAP_USER":"account@example.com",
+  "IMAP_PASSWORD":"passpass"
+}
