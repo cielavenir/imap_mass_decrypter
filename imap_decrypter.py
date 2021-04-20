@@ -52,10 +52,13 @@ def CheckPopen(args, **kwargs):
     '''
 
     proc = subprocess.Popen(args, **kwargs)
+    exc_type = None
     try:
         yield proc
+    except Exception:
+        exc_type = sys.exc_info()[0]
+        raise
     finally:
-        exc_type, value, tb = sys.exc_info()
         if exc_type is not None:
             StopProcs([proc])
         elif proc.wait():
@@ -239,4 +242,3 @@ if __name__ == '__main__':
     with open(os.path.join(os.path.dirname(os.path.realpath(__file__)),'imap_decrypter.json')) as f:
         data = json.load(f)
     DecryptBatch(data['IMAP_SERVER'],data['IMAP_PORT'],data['IMAP_USER'],data['IMAP_PASSWORD'])
-
